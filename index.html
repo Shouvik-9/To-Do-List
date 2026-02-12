@@ -14,22 +14,40 @@
     <div class="container">
         <div class="todo-app">
             <h2>
-    <div class="title-left">
-        To-Do List <img src="images/icon.png" class="main-icon">
-    </div>
-    <img src="images/darkmode.jpg" id="theme-toggle" class="theme-btn">
-</h2>
+                <div class="title-left">
+                    To-Do List <img src="images/icon.png" class="main-icon">
+                </div>
+                <img src="images/darkmode.jpg" id="theme-toggle" class="theme-btn">
+            </h2>
 
             <p class="subtitle">Your smart companion for daily tasks.</p>
             <div class="row">
                 <input type="text" id="input-box" placeholder="Add your task">
                 <button onclick="addTask()">Add</button>
             </div>
+            <div class="task-stats">
+                <span id="total-tasks">Total Tasks: 0</span>
+                <span id="completed-tasks">0/0 Completed</span>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+            <button id="delete-all" class="delete-all-btn">Delete All</button>
+
+
             <ul id="list-container">
                 <!-- <li class="checked">Task 1</li>
             <li>Task 2</li>
             <li>Task 3</li> -->
             </ul>
+            <div id="undo-bar" class="undo-bar">
+                Task deleted
+                <button id="undo-btn">Undo</button>
+                <button id="cancel-btn">Cancel</button>
+            </div>
+
         </div>
     </div>
     <script src="script.js"></script>

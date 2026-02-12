@@ -179,3 +179,116 @@ body.dark .todo-app h2{
     width: 30px;
     margin-left: 10px;
 }
+
+.task-stats{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Dark mode support */
+body.dark .task-stats{
+    color: #ccc;
+}
+
+.filters{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filter-btn{
+    padding: 6px 14px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background: #edeef0;
+    font-size: 13px;
+    transition: 0.2s ease;
+    color: #000;
+}
+
+.filter-btn:hover{
+    background: #d5d7db;
+}
+
+.filter-btn.active{
+    background: #ff5945;
+    color: #fff;
+}
+
+body.dark .filter-btn{
+    background: #3a3a3a;
+    color: #ccc;
+}
+
+body.dark .filter-btn.active{
+    background: #ff5945;
+    color: #fff;
+}
+
+.delete-all-btn{
+    display: block;
+    margin: 10px auto 15px;
+    padding: 8px 18px;
+    border: none;
+    border-radius: 25px;
+    background: #ff5945;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s ease;
+    display: none; 
+}
+
+.delete-all-btn:hover{
+    background: #e04835;
+}
+
+body.dark .delete-all-btn{
+    background: #ff5945;
+    color: #fff;
+}
+
+.undo-bar{
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    z-index: 1000;
+}
+
+.undo-bar button{
+    background: transparent;
+    border: none;
+    color: #ff5945;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
+}
+#undo-btn{
+    color: #ff5945;
+}
+
+#cancel-btn{
+    color: #ccc;
+}
+
+#cancel-btn:hover{
+    color: #fff;
+}
+
+.undo-bar button:hover{
+    text-decoration: underline;
+}
