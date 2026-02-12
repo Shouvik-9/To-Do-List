@@ -3,6 +3,7 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    transition: background 0.4s ease, color 0.4s ease;
 }
 .container{
     width: 100%;
@@ -23,6 +24,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    justify-content: space-between;
 }
 .subtitle{
     color: #777;
@@ -30,10 +32,7 @@
     margin-top: -15px;
     margin-bottom: 20px;
 }
-.todo-app h2 img{
-    width: 30px;
-    margin-left: 10px;
-}
+
 .row{
     display: flex;
     align-items: center;
@@ -106,4 +105,77 @@ ul li span{
 }
 ul li span:hover{
     background: #edeef0;
+}
+.edit-btn{
+    position: absolute;
+    right: 45px;     /* Slightly left from delete button */
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.2s ease;
+}
+
+/* Same hover effect as delete */
+.edit-btn:hover{
+    background: #edeef0;
+}
+.theme-btn{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    padding: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-btn:hover{
+    background: #edeef0;
+    transform: scale(1.08);
+}
+
+body.dark .theme-btn:hover{
+    background: #3a3a3a;
+}
+/* DARK MODE */
+body.dark{
+    background: linear-gradient(135deg, #1f1f1f, #121212);
+}
+
+body.dark .todo-app{
+    background: #2a2a2a;
+    color: #fff;
+}
+
+body.dark input{
+    color: #fff;
+}
+
+body.dark .row{
+    background: #3a3a3a;
+}
+
+body.dark ul li{
+    color: #ddd;
+}
+
+body.dark ul li.checked{
+    color: #888;
+}
+.title-left{
+    display: flex;
+    align-items: center;
+}
+body.dark .todo-app h2{
+    color: #ffffff;
+}
+
+
+.main-icon{
+    width: 30px;
+    margin-left: 10px;
 }
