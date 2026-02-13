@@ -2,8 +2,7 @@
 
 [![Typing SVG](https://readme-typing-svg.demolab.com/?lines=📝+Plan+less,+do+more.;Your+smart+companion+for+daily+tasks.;🔎+Track,+complete,+and+stay+on+top+of+your+goals.;✨+Clean+UI+with+auto-saving+magic.&center=true&color=FFFFFF&duration=7000&multiline=false&width=1000)](https://github.com/Shouvik-9)
 
-
-<img width="482" height="482" alt="Image" src="https://github.com/user-attachments/assets/609dbaba-8415-4548-9203-035f5b49cc7d" />
+<img width="400" height="482" alt="Image" src="https://github.com/user-attachments/assets/63ad3b7b-6ad8-44fe-a4be-3c08f1020050" />
 
 ---
 
@@ -14,12 +13,18 @@
 
 # 🧩 PROBLEM STATEMENT
 
-Design and develop a To-Do List Application that:
-- Allows users to add, manage, and delete daily tasks easily  
-- Provides task completion tracking with visual indicators  
-- Stores tasks locally so data persists after page refresh  
-- Delivers a responsive and user-friendly interface  
-
+## Modern users struggle to manage daily tasks efficiently due to:
+- Lack of simple, distraction-free task managers
+- No visual progress tracking for motivation
+- Loss of task data after page refresh
+- Poor user experience in basic to-do applications
+  
+## This project aims to build a feature-rich, interactive To-Do List Web Application that enables users to:
+- Add, edit, delete, and manage tasks efficiently
+- Track completion progress visually
+- Store data persistently using Local Storage
+- Experience a responsive and modern UI
+- Celebrate achievements when tasks are completed 🎉
 ---
 
 # 🧠 TECHNOLOGIES USED
@@ -33,16 +38,33 @@ Design and develop a To-Do List Application that:
 
 # 😮 WOW FACTORS
 
-The To-Do List Application offers:  
-- Simple Task Management – Easily add, delete, and mark tasks as completed.  
-- Persistent Data – Tasks remain saved even after refreshing the page.  
-- Clean UI – Minimal and visually appealing design for better user experience.  
-- Responsive Layout – Works smoothly across different screen sizes.  
+The To-Do List Application offers: 
+----
 
-## Unique features:
-- Enter Key Support – Users can add tasks quickly using the Enter key.
-- Smart Input Validation – Alerts users when trying to add empty tasks.
-- Interactive UI – Hover effects and visual feedback for better usability.
+## 📊 Dynamic Progress Bar
+- Real-time percentage tracking
+- Color zones (Red → Orange → Green)
+- Auto-celebration at 100% completion 🎊
+## 🎉 Completion Celebration Animation
+- Confetti animation triggered at full completion
+## 🕒 Task Timestamp System
+- Tracks Created time
+- Tracks Completed time
+- Improves accountability
+## 🔁 Undo Delete Feature
+- Recover recently deleted tasks within 5 seconds
+## ✏️ Edit Mode with Smart Toggle
+- Seamless task updating without page reload
+## 🌗 Dark / Light Mode
+- Persistent theme preference using Local Storage
+## 🔎 Task Filtering System
+- All / Active / Completed filters
+## 🧠 Smart Input Validation
+- Prevents empty task submission
+- Enter key support for quick add
+## 💾 Auto Save using Local Storage API
+- Data persists after refresh
+- Theme preference saved
 
 ---
 
@@ -63,6 +85,16 @@ Directory structure:
     ├── script.js
     └── style.css
 
+```
+---
+
+## 🗂️ Project Summery
+```bash
+Repository: shouvik-9/to-do-list
+Commit: 9ddb3fa2d43dc0f3f090f2860adbef1e4acbc2be
+Files analyzed: 4
+
+Estimated tokens: 5.6k
 ```
 ---
 
