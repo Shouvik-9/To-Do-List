@@ -16,26 +16,48 @@ let currentFilter = "all";
 let editingTask = null;
 let isEditing = false;
 
+
+// ======================
+// DATE TIME FORMAT
+// ======================
+function getCurrentDateTime() {
+    const now = new Date();
+    return now.toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    });
+}
+
+
+// ======================
 // ENTER KEY SUPPORT
-inputBox.addEventListener("keydown", function(e){
-    if(e.key === "Enter"){
+// ======================
+inputBox.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
         addTask();
     }
 });
 
+
+// ======================
 // DELETE ALL
+// ======================
 deleteAllBtn.addEventListener("click", () => {
 
     const totalTasks = listContainer.querySelectorAll("li").length;
 
-    if(totalTasks === 0){
+    if (totalTasks === 0) {
         alert("No tasks to delete.");
         return;
     }
 
     const confirmDelete = confirm("Are you sure you want to delete all tasks?");
-    
-    if(confirmDelete){
+
+    if (confirmDelete) {
         listContainer.innerHTML = "";
 
         editingTask = null;
@@ -49,12 +71,15 @@ deleteAllBtn.addEventListener("click", () => {
     }
 });
 
+
+// ======================
 // FILTER LOGIC
-function applyFilter(){
+// ======================
+function applyFilter() {
     const tasks = listContainer.querySelectorAll("li");
 
     tasks.forEach(task => {
-        switch(currentFilter){
+        switch (currentFilter) {
             case "all":
                 task.style.display = "";
                 break;
@@ -72,7 +97,6 @@ function applyFilter(){
 
 filterButtons.forEach(button => {
     button.addEventListener("click", () => {
-
         filterButtons.forEach(btn => btn.classList.remove("active"));
         button.classList.add("active");
 
@@ -81,15 +105,18 @@ filterButtons.forEach(button => {
     });
 });
 
-// ADD / UPDATE TASK
-function addTask(){
 
-    if(inputBox.value.trim() === ''){
+// ======================
+// ADD / UPDATE TASK
+// ======================
+function addTask() {
+
+    if (inputBox.value.trim() === '') {
         alert("Oops! Please type a task first.");
         return;
     }
 
-    if(isEditing && editingTask){
+    if (isEditing && editingTask) {
         editingTask.firstChild.textContent = inputBox.value;
 
         editingTask = null;
@@ -107,6 +134,9 @@ function addTask(){
     let li = document.createElement("li");
     li.textContent = inputBox.value;
 
+    const createdTime = getCurrentDateTime();
+    li.setAttribute("data-created", createdTime);
+
     let editBtn = document.createElement("img");
     editBtn.src = "images/edit.png";
     editBtn.className = "edit-btn";
@@ -115,6 +145,12 @@ function addTask(){
     let span = document.createElement("span");
     span.innerHTML = "\u00d7";
     li.appendChild(span);
+
+    // Timestamp display
+    let timeInfo = document.createElement("small");
+    timeInfo.className = "time-info";
+    timeInfo.innerText = `Created: ${createdTime}`;
+    li.appendChild(timeInfo);
 
     listContainer.appendChild(li);
 
@@ -125,23 +161,44 @@ function addTask(){
     applyFilter();
 }
 
+
+// ======================
 // CLICK EVENTS
-listContainer.addEventListener("click", function(e){
+// ======================
+listContainer.addEventListener("click", function (e) {
 
     // TOGGLE COMPLETE
-    if(e.target.tagName === "LI"){
+    if (e.target.tagName === "LI") {
+
         e.target.classList.toggle("checked");
+
+        const createdTime = e.target.getAttribute("data-created");
+        let timeInfo = e.target.querySelector(".time-info");
+
+        if (e.target.classList.contains("checked")) {
+            const completedTime = getCurrentDateTime();
+            e.target.setAttribute("data-completed", completedTime);
+            timeInfo.innerText =
+                `Created: ${createdTime} | Completed: ${completedTime}`;
+        } else {
+            e.target.removeAttribute("data-completed");
+            timeInfo.innerText =
+                `Created: ${createdTime}`;
+        }
+
         saveData();
         updateTaskStats();
         applyFilter();
     }
 
     // DELETE WITH UNDO
-    else if(e.target.tagName === "SPAN"){
+    else if (e.target.tagName === "SPAN") {
 
         const taskToDelete = e.target.parentElement;
 
-        lastDeletedIndex = Array.from(listContainer.children).indexOf(taskToDelete);
+        lastDeletedIndex =
+            Array.from(listContainer.children).indexOf(taskToDelete);
+
         lastDeletedTask = taskToDelete.cloneNode(true);
 
         taskToDelete.remove();
@@ -154,9 +211,9 @@ listContainer.addEventListener("click", function(e){
     }
 
     // EDIT
-    else if(e.target.classList.contains("edit-btn")){
+    else if (e.target.classList.contains("edit-btn")) {
 
-        if(editingTask === e.target.parentElement){
+        if (editingTask === e.target.parentElement) {
             editingTask = null;
             isEditing = false;
             inputBox.value = "";
@@ -173,8 +230,11 @@ listContainer.addEventListener("click", function(e){
 
 }, false);
 
+
+// ======================
 // UNDO LOGIC
-function showUndoBar(){
+// ======================
+function showUndoBar() {
     undoBar.style.display = "flex";
 
     clearTimeout(undoTimeout);
@@ -184,7 +244,7 @@ function showUndoBar(){
     }, 5000);
 }
 
-function hideUndoBar(){
+function hideUndoBar() {
     undoBar.style.display = "none";
     lastDeletedTask = null;
     lastDeletedIndex = null;
@@ -192,14 +252,17 @@ function hideUndoBar(){
 
 undoBtn.addEventListener("click", () => {
 
-    if(lastDeletedTask !== null){
+    if (lastDeletedTask !== null) {
 
         const tasks = listContainer.querySelectorAll("li");
 
-        if(lastDeletedIndex >= tasks.length){
+        if (lastDeletedIndex >= tasks.length) {
             listContainer.appendChild(lastDeletedTask);
         } else {
-            listContainer.insertBefore(lastDeletedTask, tasks[lastDeletedIndex]);
+            listContainer.insertBefore(
+                lastDeletedTask,
+                tasks[lastDeletedIndex]
+            );
         }
 
         saveData();
@@ -210,46 +273,56 @@ undoBtn.addEventListener("click", () => {
     hideUndoBar();
 });
 
-
-// CANCEL BUTTON LOGIC
 cancelBtn.addEventListener("click", () => {
     clearTimeout(undoTimeout);
     hideUndoBar();
 });
 
+
+// ======================
 // TASK COUNTER
-function updateTaskStats(){
+// ======================
+function updateTaskStats() {
     const allTasks = listContainer.querySelectorAll("li");
     const total = allTasks.length;
-    const completed = listContainer.querySelectorAll("li.checked").length;
+    const completed =
+        listContainer.querySelectorAll("li.checked").length;
 
     totalTasksDisplay.innerText = `Total Tasks: ${total}`;
-    completedTasksDisplay.innerText = `${completed}/${total} Completed`;
+    completedTasksDisplay.innerText =
+        `${completed}/${total} Completed`;
 
-    if(total >= 2){
+    if (total >= 2) {
         deleteAllBtn.style.display = "block";
     } else {
         deleteAllBtn.style.display = "none";
     }
 }
 
+
+// ======================
 // LOCAL STORAGE
-function saveData(){
+// ======================
+function saveData() {
     localStorage.setItem("data", listContainer.innerHTML);
 }
 
-function showTask(){
-    listContainer.innerHTML = localStorage.getItem("data") || "";
+function showTask() {
+    listContainer.innerHTML =
+        localStorage.getItem("data") || "";
     updateTaskStats();
     applyFilter();
 }
 
 showTask();
 
+
+// ======================
 // DARK / LIGHT MODE
+// ======================
 const savedTheme = localStorage.getItem("theme");
 
-if(savedTheme === "dark"){
+if (savedTheme === "dark") {
     document.body.classList.add("dark");
     themeToggle.src = "images/lightmode.png";
 } else {
@@ -260,7 +333,7 @@ themeToggle.addEventListener("click", () => {
 
     document.body.classList.toggle("dark");
 
-    if(document.body.classList.contains("dark")){
+    if (document.body.classList.contains("dark")) {
         themeToggle.src = "images/lightmode.png";
         localStorage.setItem("theme", "dark");
     } else {

@@ -292,3 +292,13 @@ body.dark .delete-all-btn{
 .undo-bar button:hover{
     text-decoration: underline;
 }
+.time-info{
+    display: block;
+    font-size: 11px;
+    color: #888;
+    margin-top: 5px;
+}
+
+body.dark .time-info{
+    color: #aaa;
+}
