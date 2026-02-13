@@ -29,13 +29,22 @@
                 <span id="total-tasks">Total Tasks: 0</span>
                 <span id="completed-tasks">0/0 Completed</span>
             </div>
+            <div id="progress-section" class="progress-container">
+                <div class="progress-text">
+                    <span>Progress</span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div id="progress-fill"></div>
+                </div>
+            </div>
+
             <div class="filters">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="active">Active</button>
                 <button class="filter-btn" data-filter="completed">Completed</button>
             </div>
             <button id="delete-all" class="delete-all-btn">Delete All</button>
-
 
             <ul id="list-container">
                 <!-- <li class="checked">Task 1</li>
@@ -47,10 +56,10 @@
                 <button id="undo-btn">Undo</button>
                 <button id="cancel-btn">Cancel</button>
             </div>
-
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
-</body>
 
+</body>
 </html>
